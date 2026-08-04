@@ -47,7 +47,7 @@ class GrowthChart extends StatelessWidget {
                 dotData: const FlDotData(show: false),
                 belowBarData: BarAreaData(
                   show: true,
-                  color: theme.colorScheme.primary.withOpacity(0.15),
+                  color: theme.colorScheme.primary.withValues(alpha: 0.15),
                 ),
               ),
             ],
