@@ -31,8 +31,8 @@ class _InvestmentFundScreenState extends State<InvestmentFundScreen> {
     if (!_formKey.currentState!.validate()) return;
 
     final result = simulateInvestmentFund(
-      P0: double.parse(_p0Ctrl.text),
-      PMT: double.parse(_pmtCtrl.text),
+      p0: double.parse(_p0Ctrl.text),
+      pmt: double.parse(_pmtCtrl.text),
       r: double.parse(_rCtrl.text) / 100,
       n: double.parse(_nCtrl.text),
       t: double.parse(_tCtrl.text),

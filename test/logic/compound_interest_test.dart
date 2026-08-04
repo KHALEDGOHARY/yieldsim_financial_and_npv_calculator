@@ -6,7 +6,7 @@ void main() {
     // المثال المحلول في الشيت: P=10,000، r=10%، t=3 سنوات، n=12 (شهري)
     test('يطابق المثال المحلول في fincalc_spec.xlsx', () {
       final result = calculateSimpleAndCompoundInterest(
-        P: 10000,
+        p: 10000,
         r: 0.10,
         t: 3,
         n: 12,
@@ -20,14 +20,14 @@ void main() {
 
     test('يرفض P سالبة', () {
       expect(
-        () => calculateSimpleAndCompoundInterest(P: -100, r: 0.1, t: 1, n: 12),
+        () => calculateSimpleAndCompoundInterest(p: -100, r: 0.1, t: 1, n: 12),
         throwsArgumentError,
       );
     });
 
     test('يرفض n = صفر', () {
       expect(
-        () => calculateSimpleAndCompoundInterest(P: 1000, r: 0.1, t: 1, n: 0),
+        () => calculateSimpleAndCompoundInterest(p: 1000, r: 0.1, t: 1, n: 0),
         throwsArgumentError,
       );
     });

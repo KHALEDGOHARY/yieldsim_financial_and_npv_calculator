@@ -35,12 +35,12 @@ class _PresentValueScreenState extends State<PresentValueScreen> {
 
     final result = _mode == _PvMode.single
         ? calculatePresentValue(
-            FV: double.parse(_fvCtrl.text),
+            fv: double.parse(_fvCtrl.text),
             r: double.parse(_rSingleCtrl.text) / 100,
             t: double.parse(_tSingleCtrl.text),
           )
         : calculatePresentValueAnnuity(
-            PMT: double.parse(_pmtCtrl.text),
+            pmt: double.parse(_pmtCtrl.text),
             r: double.parse(_rAnnuityCtrl.text) / 100,
             n: double.parse(_nAnnuityCtrl.text),
             t: double.parse(_tAnnuityCtrl.text),

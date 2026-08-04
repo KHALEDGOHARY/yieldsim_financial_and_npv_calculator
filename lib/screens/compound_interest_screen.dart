@@ -28,7 +28,7 @@ class _CompoundInterestScreenState extends State<CompoundInterestScreen> {
     if (!_formKey.currentState!.validate()) return;
 
     final result = calculateSimpleAndCompoundInterest(
-      P: double.parse(_pCtrl.text),
+      p: double.parse(_pCtrl.text),
       r: double.parse(_rCtrl.text) / 100,
       t: double.parse(_tCtrl.text),
       n: double.parse(_nCtrl.text),

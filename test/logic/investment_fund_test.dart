@@ -7,8 +7,8 @@ void main() {
     // FV متوقعة ≈ 111,230.71 (تم التحقق منها في fincalc_spec.xlsx)
     test('يطابق المثال المحلول (وضع إعادة الاستثمار)', () {
       final result = simulateInvestmentFund(
-        P0: 50000,
-        PMT: 500,
+        p0: 50000,
+        pmt: 500,
         r: 0.08,
         n: 12,
         t: 5,
@@ -20,16 +20,16 @@ void main() {
 
     test('المحاكاة الشهرية تطابق المعادلة المغلقة (closed-form)', () {
       final result = simulateInvestmentFund(
-        P0: 50000,
-        PMT: 500,
+        p0: 50000,
+        pmt: 500,
         r: 0.08,
         n: 12,
         t: 5,
         mode: InvestmentMode.reinvest,
       );
       final closedForm = investmentFundClosedFormCheck(
-        P0: 50000,
-        PMT: 500,
+        p0: 50000,
+        pmt: 500,
         r: 0.08,
         n: 12,
         t: 5,
@@ -40,8 +40,8 @@ void main() {
 
     test('عدد الصفوف في الجدول = عدد الأشهر + شهر البداية (0)', () {
       final result = simulateInvestmentFund(
-        P0: 10000,
-        PMT: 100,
+        p0: 10000,
+        pmt: 100,
         r: 0.06,
         n: 12,
         t: 2,
@@ -54,8 +54,8 @@ void main() {
   group('simulateInvestmentFund - وضع السحب الدوري', () {
     test('رأس المال يتراكم بالدفعات فقط، والعوائد تُسحب منفصلة', () {
       final result = simulateInvestmentFund(
-        P0: 50000,
-        PMT: 500,
+        p0: 50000,
+        pmt: 500,
         r: 0.08,
         n: 12,
         t: 5,

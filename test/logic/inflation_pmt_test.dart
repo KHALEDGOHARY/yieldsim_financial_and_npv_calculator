@@ -7,7 +7,7 @@ void main() {
     // r_real ≈ 4.76%، PMT ≈ 1,304.46 (تم التحقق منها في fincalc_spec.xlsx)
     test('يطابق المثال المحلول (الطريقة 1 - قسط ثابت)', () {
       final result = calculateInflationAdjustedPMT(
-        FVtarget: 200000,
+        fvTarget: 200000,
         r: 0.10,
         i: 0.05,
         n: 12,
@@ -21,7 +21,7 @@ void main() {
 
     test('الطريقة 2 - القسط يتصاعد سنويًا بمعدل التضخم', () {
       final result = calculateInflationAdjustedPMT(
-        FVtarget: 200000,
+        fvTarget: 200000,
         r: 0.10,
         i: 0.05,
         n: 12,

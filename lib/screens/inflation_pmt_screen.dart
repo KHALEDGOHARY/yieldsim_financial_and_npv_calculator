@@ -29,7 +29,7 @@ class _InflationPmtScreenState extends State<InflationPmtScreen> {
     if (!_formKey.currentState!.validate()) return;
 
     final result = calculateInflationAdjustedPMT(
-      FVtarget: double.parse(_fvCtrl.text),
+      fvTarget: double.parse(_fvCtrl.text),
       r: double.parse(_rCtrl.text) / 100,
       i: double.parse(_iCtrl.text) / 100,
       n: double.parse(_nCtrl.text),

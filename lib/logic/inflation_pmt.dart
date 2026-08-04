@@ -11,25 +11,25 @@ enum InflationPmtMethod { fixedRealRate, growingWithInflation }
 /// معادلة فيشر:  r_real = (1 + r) / (1 + i) − 1
 ///
 /// الطريقة 1 (قسط ثابت بمعدل حقيقي):
-///   PMT = FVtarget × (r_real/n) / [ (1 + r_real/n)^(n×t) − 1 ]
+///   PMT = fvTarget × (r_real/n) / [ (1 + r_real/n)^(n×t) − 1 ]
 ///
 /// الطريقة 2 (قسط متصاعد يزيد سنويًا مع التضخم):
 ///   PMT_سنة k = PMT_السنة الأولى × (1 + i)^(k−1)
 ///   (PMT_السنة الأولى مُحسوب بنفس معادلة الطريقة 1 كنقطة بداية).
 CalculationResult calculateInflationAdjustedPMT({
-  required double FVtarget,
+  required double fvTarget,
   required double r,
   required double i,
   required double n,
   required double t,
   required InflationPmtMethod method,
 }) {
-  if (FVtarget < 0) throw ArgumentError('الهدف المستقبلي لا يمكن أن يكون سالبًا');
+  if (fvTarget < 0) throw ArgumentError('الهدف المستقبلي لا يمكن أن يكون سالبًا');
   if (n <= 0) throw ArgumentError('n لازم يكون أكبر من صفر');
 
   final double rReal = (1 + r) / (1 + i) - 1;
   final double growthFactor = math.pow(1 + rReal / n, n * t).toDouble();
-  final double basePmt = FVtarget * (rReal / n) / (growthFactor - 1);
+  final double basePmt = fvTarget * (rReal / n) / (growthFactor - 1);
 
   if (method == InflationPmtMethod.fixedRealRate) {
     return CalculationResult(

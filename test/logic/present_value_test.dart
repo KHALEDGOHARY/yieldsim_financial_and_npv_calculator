@@ -5,7 +5,7 @@ void main() {
   group('calculatePresentValue', () {
     // المثال المحلول: FV=50,000 بعد 5 سنين، r=8% → PV ≈ 34,029
     test('يطابق المثال المحلول (مبلغ واحد)', () {
-      final result = calculatePresentValue(FV: 50000, r: 0.08, t: 5);
+      final result = calculatePresentValue(fv: 50000, r: 0.08, t: 5);
       expect(result.value('pv'), closeTo(34029, 1));
     });
   });
@@ -13,7 +13,7 @@ void main() {
   group('calculatePresentValueAnnuity', () {
     test('يحسب قيمة سلسلة دفعات متساوية بدون أخطاء', () {
       final result = calculatePresentValueAnnuity(
-        PMT: 1000,
+        pmt: 1000,
         r: 0.06,
         n: 12,
         t: 5,

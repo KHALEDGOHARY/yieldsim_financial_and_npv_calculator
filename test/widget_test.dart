@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 
@@ -15,6 +14,10 @@ void main() {
     );
     await tester.pumpAndSettle();
 
+    // نتحقق بس من عناصر مضمون ظهورها بدون أي سكرول: عنوان الشاشة،
+    // وأول حاسبتين في القائمة. ده كافٍ كـ smoke test يتأكد إن التطبيق
+    // بيبني شجرة الواجهة صح من غير أخطاء، من غير ما نعتمد على سلوك
+    // السكرول اللي بيختلف حسب حجم شاشة بيئة الاختبار.
     expect(find.text('حاسبة مالية متطورة'), findsOneWidget);
     expect(find.text('الفائدة البسيطة والمركبة'), findsOneWidget);
     expect(find.text('صندوق استثمار'), findsOneWidget);

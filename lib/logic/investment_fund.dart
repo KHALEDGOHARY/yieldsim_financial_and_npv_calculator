@@ -12,21 +12,21 @@ enum InvestmentMode { reinvest, withdraw }
 /// مش معادلة مغلقة واحدة، عشان يسهل لاحقًا إضافة تعديلات (وقف دفعات مؤقتًا..).
 ///
 /// وضع (أ) reinvest — إعادة استثمار العوائد:
-///   Balance₀ = P0
-///   Balance_k = Balance_(k-1) × (1 + r/n) + PMT   لكل شهر k من 1 إلى n×t
+///   Balance₀ = p0
+///   Balance_k = Balance_(k-1) × (1 + r/n) + pmt   لكل شهر k من 1 إلى n×t
 ///
 /// وضع (ب) withdraw — سحب العوائد دوريًا بدون إعادة استثمار:
 ///   Return_k  = Balance_(k-1) × (r/n)     (يُسحب فورًا، لا يُضاف لرأس المال)
-///   Balance_k = Balance_(k-1) + PMT
+///   Balance_k = Balance_(k-1) + pmt
 CalculationResult simulateInvestmentFund({
-  required double P0,
-  required double PMT,
+  required double p0,
+  required double pmt,
   required double r,
   required double n,
   required double t,
   required InvestmentMode mode,
 }) {
-  if (P0 < 0) throw ArgumentError('الدفعة المقدمة لا يمكن أن تكون سالبة');
+  if (p0 < 0) throw ArgumentError('الدفعة المقدمة لا يمكن أن تكون سالبة');
   if (n <= 0) throw ArgumentError('n لازم يكون أكبر من صفر');
   if (t < 0) throw ArgumentError('المدة لا يمكن أن تكون سالبة');
 
@@ -34,30 +34,30 @@ CalculationResult simulateInvestmentFund({
   final List<Map<String, dynamic>> series = [];
 
   if (mode == InvestmentMode.reinvest) {
-    double balance = P0;
+    double balance = p0;
     series.add({'month': 0, 'balance': balance});
     for (int k = 1; k <= months; k++) {
-      balance = balance * (1 + r / n) + PMT;
+      balance = balance * (1 + r / n) + pmt;
       series.add({'month': k, 'balance': balance});
     }
 
     return CalculationResult(
       values: {
         'finalValue': balance,
-        'totalContributed': P0 + PMT * months,
-        'totalGrowth': balance - (P0 + PMT * months),
+        'totalContributed': p0 + pmt * months,
+        'totalGrowth': balance - (p0 + pmt * months),
       },
       series: series,
       note: 'وضع إعادة الاستثمار: القيمة النهائية = رصيد آخر شهر.',
     );
   } else {
-    double balance = P0;
+    double balance = p0;
     double totalReturns = 0;
     series.add({'month': 0, 'balance': balance, 'return': 0.0});
     for (int k = 1; k <= months; k++) {
       final double periodReturn = balance * (r / n);
       totalReturns += periodReturn;
-      balance = balance + PMT;
+      balance = balance + pmt;
       series.add({'month': k, 'balance': balance, 'return': periodReturn});
     }
 
@@ -78,14 +78,14 @@ CalculationResult simulateInvestmentFund({
 /// معادلة مغلقة (closed-form) — تُستخدم فقط للتحقق الداخلي (unit tests)،
 /// وليست مصدر النتيجة المعروضة للمستخدم في وضع إعادة الاستثمار.
 double investmentFundClosedFormCheck({
-  required double P0,
-  required double PMT,
+  required double p0,
+  required double pmt,
   required double r,
   required double n,
   required double t,
 }) {
   final double growthFactor = math.pow(1 + r / n, n * t).toDouble();
-  final double fvFromP0 = P0 * growthFactor;
-  final double fvFromPMT = PMT * ((growthFactor - 1) / (r / n));
+  final double fvFromP0 = p0 * growthFactor;
+  final double fvFromPMT = pmt * ((growthFactor - 1) / (r / n));
   return fvFromP0 + fvFromPMT;
 }
